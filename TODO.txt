@@ -1,0 +1,6 @@
+TODO:
+
+- List the features of pshare
+- Come up with a design for the command ie. possible flags + args, list of platforms, etc. 
+- Read up on platform API's for a post
+- Set up main .py file structure using argparse module
