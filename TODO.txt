@@ -1,6 +1,8 @@
 TODO:
 
 - List the features of pshare
+    - post link / description to facebook (possibly img files)
+    - post link / description to twitter (possibly img files)
 - Come up with a design for the command ie. possible flags + args, list of platforms, etc. 
 - Read up on platform API's for a post
 
