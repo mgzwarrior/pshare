@@ -7,9 +7,11 @@
 ###TODO:
 
     1. Describe the overall goal of pshare -- why use it?
+        - to provide an intuitive, straight-forward CLI to fb + twitter
     2. What are the use cases of pshare?
-        - post to, read from, (maybe) update existing, delete (CRUD-like actions)
-    3. How are we going to implement above use cases? -- tweepy + facepy + some custom functionality
+        - post, read, del (only a subset of API functionality to accomplish core tasks)
+    3. How are we going to implement above use cases?
+        - tweepy + facepy + custom functionality
     4. Design the specifics of the application: possible classes, modules (argparse), examples of usage, dependencies, etc..
         - usage: 
             psh -f post <post-description>... (post to fb)
@@ -20,3 +22,17 @@
     5. Create two different install / build routes:
         - git clone https://github.com/mgzwarrior/pshare.git
         - pip install pshare
+
+###Usage:
+
+    1. psh \<flags> \<command> \<command-args>
+    2. flags:
+        a. -f : apply command + command-args to Facebook
+        b. -t : apply command + command-args to Twitter
+    3. commands:
+        a. help : print out documentation
+        b. post : post args to platform(s)
+        c. read : read from platform(s)
+    4. command-args:
+        a. plaintext
+        b. filename, which contains the contents to be posted (need some way to specify, or check for extensions)
