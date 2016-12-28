@@ -25,7 +25,7 @@
 
 ###Usage:
 
-    1. psh \<flags> \<command> \<command-args>
+    1. psh <flags> <command> <command-args>
     2. flags:
         a. -f : apply command + command-args to Facebook
         b. -t : apply command + command-args to Twitter
