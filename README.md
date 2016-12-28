@@ -8,12 +8,15 @@
 
     1. Describe the overall goal of pshare -- why use it?
     2. What are the use cases of pshare?
-        - post to, read from, update existing, delete (CRUD-like actions)
+        - post to, read from, (maybe) update existing, delete (CRUD-like actions)
     3. How are we going to implement above use cases? -- tweepy + facepy + some custom functionality
     4. Design the specifics of the application: possible classes, modules (argparse), examples of usage, dependencies, etc..
         - usage: 
             psh -f post <post-description>... (post to fb)
             psh -ft read (output twitter feed + fb timeline)
+        - dependencies:
+            tweepy
+            facepy
     5. Create two different install / build routes:
         - git clone https://github.com/mgzwarrior/pshare.git
         - pip install pshare
