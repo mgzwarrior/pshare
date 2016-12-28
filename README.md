@@ -3,13 +3,7 @@
 1. _pshare_ is a command-line interface (CLI) for social media sharing on Twitter and Facebook. The goal of pshare is to be *simple, lightweight, and easy to use* to do any type of CRUD-activity on the terminal.
 2. The design of pshare is to be on top of Facebook and Twitter API wrappers, to allow them to do the heavy lifting of interacting directly with the API, which allows pshare to pick and choose the functions necessary and most commonly used to add to this project.
 3. 
-    pshare
-    |
-    |
-    API Wrappers (tweepy, facepy)
-    |
-    |
-    API (Facebook Graph API, Twitter API)
+    pshare <-- API Wrappers (tweepy, facepy) <-- API (Facebook Graph API, Twitter API)
 
 ###TODO:
 
