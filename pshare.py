@@ -4,11 +4,14 @@ Authors: Brandon Powers & Matt Grant
 
 import argparse
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('post', help='type in the content of your post')
-    args = parser.parse_args()
-    print args.post
+parser = argparse.ArgumentParser(description='post + read + del to and from Facebook and/or Twitter')
+parser.add_argument('-f', '--facebook', action='store_true',
+                    help='apply <command> <command-args> to Facebook')
+parser.add_argument('-t', '--twitter', action='store_true',
+                    help='apply <command> <command-args> to Twitter')
+args = parser.parse_args()
 
-if __name__ == '__main__':
-    main()
+if args.facebook:
+    print 'apply to Facebook'
+if args.twitter:
+    print 'apply to Twitter'

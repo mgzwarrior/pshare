@@ -36,3 +36,13 @@
     4. command-args:
         a. plaintext
         b. filename, which contains the contents to be posted (need some way to specify, or check for extensions)
+
+###Module: argparse
+
+    1. Structure: 
+        - argparse.ArgumentParser() returns an ArgumentParser object with two key methods:
+            - .add_argument()
+            - .parse_args()
+        - FileType objects
+        - .add_argument_group()
+        - .add_mutually_exclusive_group()
