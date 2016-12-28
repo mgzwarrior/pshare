@@ -7,20 +7,12 @@
 
 ###TODO:
 
-- List the features of pshare
-    - post link / description to facebook (possibly img files)
-    - post link / description to twitter (possibly img files)
-- Come up with a design for the command ie. possible flags + args, list of platforms, etc. 
-- Read up on platform API's for a post
-
-- Stuff we're gunna need:
-    - argparse module (python standard lib)
-    - curl (unix library)
-    - possible API's
-
-- Use API wrappers tweepy & facepy OR manually work with API's? Figure out.
-    - Pro of using wrappers:
-        1. heavy lifting is done for us
-        2. lets us use the functionality of these heavy API interaction wrappers to create a simple CLI that lets you post to BOTH in a single ocmmand, etc.
-        3. So the power of pshare would be in it's simplicity & combination of social medias. ALSO, it would be a layer on top of these wrappers, so very high level.
-        4. Easier/faster to develop
+    1. Describe the overall goal of pshare -- why use it?
+    2. What are the use cases of pshare?
+        - post link / description to facebook (possibly img files)
+        - post link / description to twitter (possibly img files)
+    3. How are we going to implement above use cases? -- tweepy + facepy + some custom functionality
+    4. Design the specifics of the application: possible classes, modules (argparse), examples of usage, dependencies, etc..
+    5. Create two different install / build routes:
+        - git clone https://github.com/mgzwarrior/pshare.git
+        - pip install pshare
