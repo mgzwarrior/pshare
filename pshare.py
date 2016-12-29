@@ -1,7 +1,18 @@
 '''
 Authors: Brandon Powers & Matt Grant
 '''
+# TODO: Twitter actions:
+#           - post tweet (both txt + media files w/ txt): 
+#               - psh -t post -m "dog.jpg" -s "status/description.txt"
+#               - psh -t post -s "status/description.txt"
+#               - psh -t post "hey there twitter!"
+#               - psh -t post (will prompt the user to enter status into stdin)
+#           - read tweet(s): 
+#               - psh -t read -n 40 (output twitter feed (40 statuses))
+#               - psh -t read -v (output twitter feed w extra info per tweet (default: 20 statuses))
+#               - psh -t read (output twitter feed (default: 20 statuses))
 
+from tweet import Tweet
 import sys
 import argparse
 import tweepy
@@ -26,6 +37,10 @@ parser.add_argument('-f', '--facebook', action='store_true',
                     help='apply <command> <command-args> to Facebook')
 parser.add_argument('-t', '--twitter', action='store_true',
                     help='apply <command> <command-args> to Twitter')
+parser.add_argument('-v', '--verbose', action='store_true',
+                    help='display extra information')
+parser.add_argument('-n', '--number', type=int, default=10, 
+                    help='amount of tweets to be displayed')
 parser.add_argument('command', type=str, choices=['read', 'post', 'del'], help='command to execute')
 args = parser.parse_args()
 
@@ -61,6 +76,26 @@ def verify_twitter(api):
         print 'pshare.py: error: credentials are invalid: delete "twitter-access-token.txt" & re-authenticate'
         sys.exit(1)
 
+def statuses_to_tweets(statuses):
+    tweets = []
+    for status in statuses:
+        name = str(status.user.name)
+        screen_name = str(status.user.screen_name)
+        text = status.text
+        created_at = status.created_at
+        id_num = status.id
+        tweets.append(Tweet(name, screen_name, text, created_at, id_num))
+    return tweets
+
+def read_twitter(api):
+    statuses = api.home_timeline(count=args.number)
+    tweets = statuses_to_tweets(statuses)
+    print '\n**Top {} tweets on your timeline**\n'.format(str(args.number))
+    for tweet in tweets:
+        tweet.display(args.verbose)
+
+def post_twitter(api):
+    print 'post_twitter()'
 
 def init_facebook():
     print 'init_facebook()'
@@ -84,24 +119,16 @@ def main():
         api = tweepy.API(auth)
         verify_twitter(api)
         
-        public_tweets = api.home_timeline()
-        for tweet in public_tweets:
-            print tweet.text + '\n'
-        # Defaults to posting a tweet (despite command) for testing purposes
-        # api.update_status(raw_input('Enter tweet: '))
+        if args.command == 'read':
+            read_twitter(api)
+        elif args.command == 'post':
+            post_twitter(api)
+        else:
+            print 'del'
     
     if args.facebook:
         # Facebook OAuth not implemented yet
-
         print 'called with -f flag for facebook'
     
-    # check positional argument <command>
-    if args.command == 'read':
-        print 'read'
-    elif args.command == 'post':
-        print 'post'
-    else:
-        print 'del'
-
 if __name__ == '__main__':
     main()
