@@ -31,6 +31,24 @@ args = parser.parse_args()
 if args.facebook:
     print 'apply to Facebook'
 
+'''
+def init_twitter():
+    try:
+        print '**Initial authentication required for first-time user**'
+        print '(1) Open the following URL in a web browser: ' + str(auth.get_authorization_url())
+        print '(2) Authorize pshare to post to + read from your Twitter account'
+        verifier = raw_input('(3) Input the access code Twitter redirects you to here: ')
+        print '(4) Getting access token...'
+        auth.get_access_token(verifier)
+        print '(5) Storing access token information in file "twitter-access-token.txt" for future use'
+        with open(filename, 'w') as outfile:
+            outfile.write('{}\n{}'.format(auth.access_token, auth.access_token_secret))
+    except tweepy.TweepError:
+        print 'pshare.py: error: failed to get request token OR access token.'
+    
+def init_facebook();
+'''
+
 if args.twitter:
     filename = 'twitter-access-token.txt'
     auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET);
