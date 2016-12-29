@@ -11,8 +11,10 @@ import os.path
 import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
 
-CONSUMER_KEY = 'xopCIjkuJk5FJupf653EAI9Am'
-CONSUMER_SECRET = 'X7BVFS7GCYIUzsvQE6JuiFTnFnPPvDy954UUVb6HxOF0MAXXlH'
+# The following 2 pieces of info are hidden in a .txt file in local dir -- do not expose to public -- ask for use
+CONSUMER_KEY = ''
+CONSUMER_SECRET = '' 
+
 ACCESS_KEY = ''
 ACCESS_SECRET = ''
 
