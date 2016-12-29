@@ -12,12 +12,13 @@ import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
 
 # initializing authentication -- consumer info is hidden in local directory, not on GitHub for security purposes -- ask for use
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET);
 
-ACCESS_KEY = ''
-ACCESS_SECRET = ''
+TWITTER_CONSUMER_KEY = 'xopCIjkuJk5FJupf653EAI9Am'
+TWITTER_CONSUMER_SECRET = 'X7BVFS7GCYIUzsvQE6JuiFTnFnPPvDy954UUVb6HxOF0MAXXlH'
+auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET);
+
+TWITTER_ACCESS_KEY = ''
+TWITTER_ACCESS_SECRET = ''
 
 # initializing parser 
 parser = argparse.ArgumentParser(description='post + read + del to and from Facebook and/or Twitter')
@@ -44,13 +45,13 @@ def init_twitter():
         print 'pshare.py: error: failed to get request token OR access token.'
     
 def auth_twitter():
-    # first line is ACCESS_KEY, second line is ACCESS_SECRET <-- reason for hardcoded indices
+    # first line is TWITTER_ACCESS_KEY, second line is TWITTER_ACCESS_SECRET <-- reason for hardcoded indices
     filename = 'twitter-access-token.txt'
     with open(filename, 'r') as infile:
         access_token = infile.readlines()
-        ACCESS_KEY = str(access_token[0]).rstrip('\n')
-        ACCESS_SECRET = str(access_token[1])
-    auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+        TWITTER_ACCESS_KEY = str(access_token[0]).rstrip('\n')
+        TWITTER_ACCESS_SECRET = str(access_token[1])
+    auth.set_access_token(TWITTER_ACCESS_KEY, TWITTER_ACCESS_SECRET)
 
 def verify_twitter(api):
     try:
@@ -83,11 +84,15 @@ def main():
         api = tweepy.API(auth)
         verify_twitter(api)
         
+        public_tweets = api.home_timeline()
+        for tweet in public_tweets:
+            print tweet.text + '\n'
         # Defaults to posting a tweet (despite command) for testing purposes
-        api.update_status(raw_input('Enter tweet: '))
+        # api.update_status(raw_input('Enter tweet: '))
     
     if args.facebook:
         # Facebook OAuth not implemented yet
+
         print 'called with -f flag for facebook'
     
     # check positional argument <command>
