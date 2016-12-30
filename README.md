@@ -25,24 +25,29 @@
 
 ###Usage:
 
-    1. psh <flags> <command> <command-args>
+    1. psh <flags> <command> <cargs | cflags>
     2. flags:
         a. -f : apply command + command-args to Facebook
         b. -t : apply command + command-args to Twitter
     3. commands:
-        a. help : print out documentation
-        b. post : post args to platform(s)
-        c. read : read from platform(s)
-    4. command-args:
-        a. plaintext
-        b. filename, which contains the contents to be posted (need some way to specify, or check for extensions)
+        a. post : post args to platform(s)
+        b. read : read from platform(s)
+        b. del : del from platform(s)
+    4. cargs:
+        a. read : home | user (default: home)
+        b. post : "str" | "" (default: home, when used w post, prompts user to type in status)
+        c. del : 123456 (id_num of tweet)
+    5. cflags:
+        a. post : -m "media-filename.jpg" | -s "status-filename.txt"
+        b. read : -n 5 (output 5 tweets) | -v (display more info per tweet)
 
-###Module: argparse
+    6. Examples:
 
-    1. Structure: 
-        - argparse.ArgumentParser() returns an ArgumentParser object with two key methods:
-            - .add_argument()
-            - .parse_args()
-        - FileType objects
-        - .add_argument_group()
-        - .add_mutually_exclusive_group()
+        psh -t post (prompt user to enter status)
+        psh -t post "tweet" (tweet cargs)
+        psh -t post -s "file.txt" (tweet contents of file.txt)
+        psh -t post -m "media.jpg" -s "file.txt" (tweet media.jpg with contents of file.txt as status)
+        psh -t post "media-text" -m "media.jpg"
+        psh -t read (default: home feed w 10 tweets)
+        psh -t read user -v -n 5 (user feed w 5 tweets & verbose info)
+        psh -t del 81067 (delete tweet w id_num 81067)

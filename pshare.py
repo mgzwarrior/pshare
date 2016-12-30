@@ -1,22 +1,6 @@
 '''
 Authors: Brandon Powers & Matt Grant
 '''
-# TODO: Twitter actions:
-#           - post tweet (both txt + media files w/ txt): 
-#               - psh -t post -m "dog.jpg" -s "status/description.txt"
-#               - psh -t post -s "status/description.txt"
-#               - psh -t post "hey there twitter!"
-#               - psh -t post (will prompt the user to enter status into stdin)
-#           - read tweet(s): 
-#               - psh -t read -n 40 (output twitter feed (40 statuses))
-#               - psh -t read -v (output twitter feed w extra info per tweet (default: 10 statuses))
-#               - psh -t read (output [home] twitter feed (default: 10 statuses))
-#               - psh -t read home (output [home] twitter feed (default: 10 statuses))
-#               - psh -t read user (output [user] twitter feed (default: 10 statuses))
-#               - psh -t read user -v -n 5 (output [user] twitter feed w extra info (5 statuses))
-#           - del tweet(s)
-#               - psh -t del <id_num> (delete tweet with id_num)
-
 from tweet import Tweet
 import sys
 import argparse
@@ -28,30 +12,36 @@ import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
 
 # initializing authentication -- consumer info is hidden in local directory, not on GitHub for security purposes -- ask for use
-
-TWITTER_CONSUMER_KEY = 'xopCIjkuJk5FJupf653EAI9Am'
-TWITTER_CONSUMER_SECRET = 'X7BVFS7GCYIUzsvQE6JuiFTnFnPPvDy954UUVb6HxOF0MAXXlH'
+TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_SECRET = ''
 auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
 
 TWITTER_ACCESS_KEY = ''
 TWITTER_ACCESS_SECRET = ''
 
 # initializing parser 
-parser = argparse.ArgumentParser(description='post + read + del to and from Facebook and/or Twitter')
-parser.add_argument('-f', '--facebook', action='store_true',
-                    help='apply <command> <command-args> to Facebook')
-parser.add_argument('-t', '--twitter', action='store_true',
-                    help='apply <command> <command-args> to Twitter')
-parser.add_argument('-v', '--verbose', action='store_true',
+# usage: psh <flags> <command> <cargs | cflags>
+parser = argparse.ArgumentParser(description='post + read + del to and from Facebook and/or Twitter',
+                                prog='pshare', usage='%(prog)s <flags> <command> <cargs | cflags>',
+                                epilog='See documentation at https://github.com/mgzwarrior/pshare for more help.')
+flags = parser.add_argument_group('flags')
+flags.add_argument('-f', '--facebook', action='store_true',
+                    help='apply <command> to Facebook')
+flags.add_argument('-t', '--twitter', action='store_true',
+                    help='apply <command> to Twitter')
+parser.add_argument('command', type=str, choices=['read', 'post', 'del'], 
+                    help='command to execute')
+parser.add_argument('cargs', type=str, nargs='?', default='home', 
+                    help='command args')
+cflags = parser.add_argument_group('cflags')
+cflags.add_argument('-v', '--verbose', action='store_true',
                     help='display extra information')
-parser.add_argument('-n', '--number', type=int, default=10,
+cflags.add_argument('-n', '--number', type=int, default=10,
                     help='amount of tweets to be displayed')
-parser.add_argument('-m', '--media', type=str, default='',
+cflags.add_argument('-m', '--media', type=str, default='',
                     help='name of media file to be posted')
-parser.add_argument('-s', '--status', type=str, default='',
+cflags.add_argument('-s', '--status', type=str, default='',
                     help='name of text file to be posted')
-parser.add_argument('command', type=str, choices=['read', 'post', 'del'], help='command to execute')
-parser.add_argument('cargs', type=str, nargs='?', default='home', help='args for previous command')
 args = parser.parse_args()
 
 def init_twitter():
@@ -109,23 +99,39 @@ def read_twitter(api):
         tweet.display(args.verbose)
 
 def post_twitter(api):
-    if not args.cargs == 'home':
-        api.update_status(args.cargs)
-    elif args.media and args.status:
-        status = ''
-        with open(args.status, 'r') as infile:
-            status = infile.read()
-        api.update_with_media(args.media, status) 
-    elif args.media:
-        api.update_with_media(args.media)
-    elif args.status:
-        status = ''
-        with open(args.status, 'r') as infile:
-            status = infile.read()
-        api.update_status(status)
-    else:
-        status = raw_input('Enter tweet to post: ')
-        api.update_status(status)
+    try:
+        # tweet media with cargs as text | tweet cargs as text, no media
+        if not args.cargs == 'home' and args.media:
+            api.update_with_media(args.media, args.cargs)
+        elif not args.cargs == 'home':
+            api.update_status(args.cargs)
+
+        # tweet media with status file contents as text
+        elif args.media and args.status:
+            status = ''
+            with open(args.status, 'r') as infile:
+                status = infile.read()
+            api.update_with_media(args.media, status) 
+
+        # only media file -- tweet media
+        elif args.media:
+            api.update_with_media(args.media)
+
+        # only status file -- tweet contents
+        elif args.status:
+            status = ''
+            with open(args.status, 'r') as infile:
+                status = infile.read()
+            api.update_status(status)
+
+        # prompt user -- no cargs, media, or status file
+        else:
+            status = raw_input('Enter tweet to post: ')
+            api.update_status(status)
+    
+    except tweepy.TweepError:
+        print 'pshare.py: error: tweet was over 140 characters OR encountered a post error' 
+        sys.exit(1)
 
 def del_twitter(api):
     try:
