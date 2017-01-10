@@ -4,30 +4,24 @@ Allows you to interact with your social media (Twitter + Facebook) through the c
 Suppose you'd like to:
 
 1. Read your timeline on both Twitter & Facebook:
-
-
+    '''
     psh -tf read
-
-
+    '''
 2. Share a blog post on Facebook:
-
-
+    '''
     psh -f post "Check out my latest post at: https://brandon-powers.github.io/blog/why-computer-science"
-
-
+    '''
 3. Upload a picture with a description on Twitter (-m "file.jpg" specifies the media filename):
-
-
+    '''
     psh -t post "This pic is something else!" -m "media-file.jpg"
-
-
+    '''
 4. Delete your most recent tweet ('user' reads your tweets, -n 1 says read 1 tweet, -v adds tweet id to the output):
 
-
+    '''
     psh -t read user -n 1 -v
-    -> copy the tweet id from stdout
+    # copy the tweet id from stdout
     psh -t del <tweet_id>
-
+    '''
 
 Check out the docs below for additional usage information.
 
