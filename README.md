@@ -23,7 +23,7 @@
         - git clone https://github.com/mgzwarrior/pshare.git
         - pip install pshare
 
-###Usage:
+##Usage:
 
     1. psh <flags> <command> <cargs | cflags>
     2. flags:
