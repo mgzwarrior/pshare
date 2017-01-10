@@ -34,29 +34,31 @@ First, pshare is written in Python 2.7, so your interpreter must be version 2.7.
 
 Second, it depends on the following API wrappers that you'll need to install:
 
-    1. tweepy (which can be found here: https://github.com/tweepy/tweepy)
-        - Using PyPI: 
-            ```
-            pip install tweepy
-            ```
+1. tweepy (which can be found here: https://github.com/tweepy/tweepy)
+    - Using PyPI: 
+        ```
+        pip install tweepy
+        ```
 
-        - Manual setup:
-            ```
-            git clone https://github.com/tweepy/tweepy.git
-            cd tweepy
-            python setup.py install
-            ```
+    - Manual setup:
+        ```
+        git clone https://github.com/tweepy/tweepy.git
+        cd tweepy
+        python setup.py install
+        ```
 
-    2. facepy
+2. facepy
 
 ##Installation
 
 The easiest way to install pshare is using PyPI (TODO -- not implemented yet):
+    
     ```
     pip install pshare
     ```
 
 Or you can manually install it:
+    
     ```
     git clone https://github.com/mgzwarrior/pshare
     cd src/
