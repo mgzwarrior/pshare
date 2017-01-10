@@ -53,17 +53,13 @@ Second, it depends on the following API wrappers that you'll need to install:
 
 The easiest way to install pshare is using PyPI (TODO -- not implemented yet):
     
-    ```
     pip install pshare
-    ```
 
 Or you can manually install it:
     
-    ```
     git clone https://github.com/mgzwarrior/pshare
     cd src/
     psh ...
-    ```
 
 ##Usage:
 
