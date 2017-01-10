@@ -2,6 +2,7 @@
 Allows you to interact with your social media (Twitter + Facebook) through the command-line.
 
 Suppose you'd like to:
+
 1. Read your timeline on both Twitter & Facebook:
     
     psh -tf read
