@@ -25,6 +25,7 @@ Suppose you'd like to:
     # copy the tweet id from stdout
     psh -t del <tweet_id>
     ```
+
 Check out the docs below for additional usage information.
 
 ##Usage:
