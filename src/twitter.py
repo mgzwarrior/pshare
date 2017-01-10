@@ -15,12 +15,22 @@ ACCESS_SECRET = ''
 
 class Twitter:
     def __init__(self, args):
+        '''
+        Initializes the instance variables of a Twitter instance:
+            auth -> OAuth object used to gain access to tweepy API
+            filename -> Location of access token info (if it exists)
+            api -> Holds the tweepy API object
+            args -> Command-line args used to execute commands {read, post, del}
+        '''
         self.auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         self.filename = 'twitter-access-token.txt'
         self.api = ''
         self.args = args
         
     def login(self):
+        '''
+        User login by attaching the access token to 'self.auth'
+        '''
         access_token_exists = os.path.isfile(self.filename)
         if access_token_exists: 
             self.known_user_auth()
@@ -28,6 +38,10 @@ class Twitter:
             self.first_time_auth()
 
     def known_user_auth(self):
+        '''
+        Reads the access token (first line = key, second line = secret)
+        from 'self.filename' & adds it to 'self.auth'
+        '''
         # first line is TWITTER_ACCESS_KEY, second line is TWITTER_ACCESS_SECRET <-- reason for hardcoded indices
         with open(self.filename, 'r') as infile:
             access_token = infile.readlines()
@@ -36,6 +50,10 @@ class Twitter:
         self.auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 
     def first_time_auth(self):
+        '''
+        Asks user to authorize pshare by requesting an access token, 
+        then stores access token in a local file & adds it to 'self.auth'
+        '''
         try:
             print '**Initial authentication required for first-time user**'
             print '(1) Open the following URL in a web browser: ' + str(self.auth.get_authorization_url())
@@ -50,11 +68,17 @@ class Twitter:
             print 'pshare.py: error: failed to get request token OR access token.'
 
     def get_tweepy_API(self):
+        '''
+        Initialize & verify tweepy API credentials, stored in 'self.api'
+        '''
         print 'Authenticating credentials...'
         self.api = tweepy.API(self.auth)
         self.verify()
 
     def verify(self):
+        '''
+        Verify tweepy API credentials
+        '''
         try:
             if self.api.verify_credentials():
                 print 'Verified authentication credentials -- gained access to Twitter API'
@@ -63,6 +87,9 @@ class Twitter:
             sys.exit(1)
 
     def read(self):
+        '''
+        Execute a read command, using the args specified in 'self.args'
+        '''
         statuses = []
         if self.args.cargs == 'home':
             statuses = self.api.home_timeline(count=self.args.number)
@@ -74,9 +101,13 @@ class Twitter:
             tweet.display(self.args.verbose)
     
     def statuses_to_tweets(self, statuses):
+        '''
+        Given a list of status objects, extract only the necessary info
+        & return a list of Tweet objects -- helper method for read()
+        '''
         tweets = []
         for status in statuses:
-            name = str(status.user.name)
+            name = status.user.name.encode('utf-8')
             screen_name = str(status.user.screen_name)
             text = status.text
             created_at = status.created_at
@@ -85,6 +116,9 @@ class Twitter:
         return tweets
 
     def post(self):
+        '''
+        Execute a post command, using the args specified in 'self.args'
+        '''
         try:
             # tweet media with cargs as text | tweet cargs as text, no media
             if not self.args.cargs == 'home' and self.args.media:
@@ -120,6 +154,9 @@ class Twitter:
             sys.exit(1)
 
     def delete(self):
+        '''
+        Execute a del command, using the args specified in 'self.args'
+        '''
         try:
             self.api.destroy_status(self.args.cargs)
             print 'Deleted tweet with id #: {}'.format(str(self.args.cargs))

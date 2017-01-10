@@ -1,27 +1,19 @@
-## Description:
+##pshare
+Allows you to interact with your social media (Twitter + Facebook) through the command-line.
 
-1. _pshare_ is a command-line interface (CLI) for social media sharing on Twitter and Facebook. The goal of pshare is to be *simple, lightweight, and easy to use* to do any type of CRUD-activity on the terminal.
-2. The design of pshare is to be on top of Facebook and Twitter API wrappers, to allow them to do the heavy lifting of interacting directly with the API, which allows pshare to pick and choose the functions necessary and most commonly used to add to this project.
-3. pshare -- API Wrappers (tweepy, facepy) -- API (Facebook Graph API, Twitter API)
+Suppose you'd like to:
+1. Read your timeline on both Twitter & Facebook:
+    psh -tf read
+2. Share a blog post on Facebook:
+    psh -f post "Check out my latest post at: https://brandon-powers.github.io/blog/why-computer-science"
+3. Upload a picture with a description on Twitter (-m "file.jpg" specifies the media filename):
+    psh -t post "This pic is something else!" -m "media-file.jpg"
+3. Delete your most recent tweet ('user' reads your tweets, -n 1 says read 1 tweet, -v adds tweet id to the output):
+    psh -t read user -n 1 -v
+    # copy the tweet id from stdout
+    psh -t del <tweet_id>
 
-###TODO:
-
-    1. Describe the overall goal of pshare -- why use it?
-        - to provide an intuitive, straight-forward CLI to fb + twitter
-    2. What are the use cases of pshare?
-        - post, read, del (only a subset of API functionality to accomplish core tasks)
-    3. How are we going to implement above use cases?
-        - tweepy + facepy + custom functionality
-    4. Design the specifics of the application: possible classes, modules (argparse), examples of usage, dependencies, etc..
-        - usage: 
-            psh -f post <post-description>... (post to fb)
-            psh -ft read (output twitter feed + fb timeline)
-        - dependencies:
-            tweepy
-            facepy
-    5. Create two different install / build routes:
-        - git clone https://github.com/mgzwarrior/pshare.git
-        - pip install pshare
+Check out the docs below for additional usage information.
 
 ##Usage:
 
@@ -51,3 +43,31 @@
         psh -t read (default: home feed w 10 tweets)
         psh -t read user -v -n 5 (user feed w 5 tweets & verbose info)
         psh -t del 81067 (delete tweet w id_num 81067)
+
+##Dependencies:
+
+## Description:
+
+1. _pshare_ is a command-line interface (CLI) for social media sharing on Twitter and Facebook. The goal of pshare is to be *simple, lightweight, and easy to use* to do any type of CRUD-activity on the terminal.
+2. The design of pshare is to be on top of Facebook and Twitter API wrappers, to allow them to do the heavy lifting of interacting directly with the API, which allows pshare to pick and choose the functions necessary and most commonly used to add to this project.
+3. pshare -- API Wrappers (tweepy, facepy) -- API (Facebook Graph API, Twitter API)
+
+###TODO:
+
+    1. Describe the overall goal of pshare -- why use it?
+        - to provide an intuitive, straight-forward CLI to fb + twitter
+    2. What are the use cases of pshare?
+        - post, read, del (only a subset of API functionality to accomplish core tasks)
+    3. How are we going to implement above use cases?
+        - tweepy + facepy + custom functionality
+    4. Design the specifics of the application: possible classes, modules (argparse), examples of usage, dependencies, etc..
+        - usage: 
+            psh -f post <post-description>... (post to fb)
+            psh -ft read (output twitter feed + fb timeline)
+        - dependencies:
+            tweepy
+            facepy
+    5. Create two different install / build routes:
+        - git clone https://github.com/mgzwarrior/pshare.git
+        - pip install pshare
+
