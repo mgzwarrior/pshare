@@ -28,6 +28,41 @@ Suppose you'd like to:
 
 Check out the docs below for additional usage information.
 
+##Dependencies:
+
+First, pshare is written in Python 2.7, so your interpreter must be version 2.7.
+
+Second, it depends on the following API wrappers that you'll need to install:
+
+    1. tweepy (which can be found here: https://github.com/tweepy/tweepy)
+        - Using PyPI: 
+            ```
+            pip install tweepy
+            ```
+
+        - Manual setup:
+            ```
+            git clone https://github.com/tweepy/tweepy.git
+            cd tweepy
+            python setup.py install
+            ```
+
+    2. facepy
+
+##Installation
+
+The easiest way to install pshare is using PyPI (TODO -- not implemented yet):
+    ```
+    pip install pshare
+    ```
+
+Or you can manually install it:
+    ```
+    git clone https://github.com/mgzwarrior/pshare
+    cd src/
+    psh ...
+    ```
+
 ##Usage:
 
     1. psh <flags> <command> <cargs | cflags>
@@ -57,8 +92,6 @@ Check out the docs below for additional usage information.
         psh -t read user -v -n 5 (user feed w 5 tweets & verbose info)
         psh -t del 81067 (delete tweet w id_num 81067)
 
-##Dependencies:
-
 ## Description:
 
 1. _pshare_ is a command-line interface (CLI) for social media sharing on Twitter and Facebook. The goal of pshare is to be *simple, lightweight, and easy to use* to do any type of CRUD-activity on the terminal.
@@ -83,4 +116,3 @@ Check out the docs below for additional usage information.
     5. Create two different install / build routes:
         - git clone https://github.com/mgzwarrior/pshare.git
         - pip install pshare
-
