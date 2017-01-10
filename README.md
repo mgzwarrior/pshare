@@ -1,5 +1,5 @@
 ##pshare
-_Allows you to interact with your social media (Twitter + Facebook) through the command-line._
+__Allows you to interact with your social media (Twitter + Facebook) through the command-line.__
 
 Suppose you'd like to:
 
