@@ -1,6 +1,8 @@
 '''
-Object representing the actions specified 
-with the -t flag for Twitter
+Author: Brandon Powers
+Purpose:
+    - 'Twitter' is a class that implements the
+    actions specified by the -t flag in pshare
 '''
 
 from tweet import Tweet
