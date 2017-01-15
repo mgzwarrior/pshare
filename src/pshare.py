@@ -2,6 +2,7 @@
 Authors: Brandon Powers & Matt Grant
 '''
 
+import sys
 from twitter import Twitter
 import argparse
 

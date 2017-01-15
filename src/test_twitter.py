@@ -6,6 +6,7 @@ Purpose:
 '''
 
 import unittest
+import tweepy
 from twitter import Twitter
 from argparse import Namespace
 
@@ -36,10 +37,14 @@ class TestTwitter(unittest.TestCase):
         self.assertEqual(self.t.auth.access_token, access_token)
         self.assertEqual(self.t.auth.access_token_secret, access_token_secret)
 
-    #def test_get_tweepy_API(self):
+    def test_get_tweepy_API(self):
         '''
         Tests get_tweepy_API & verify() indirectly
         '''
+        self.t.login()
+        self.assertFalse(isinstance(self.t.api, tweepy.API))
+        self.t.get_tweepy_API()
+        self.assertTrue(isinstance(self.t.api, tweepy.API))
 
     #def test_statuses_to_tweets(self):
 

@@ -5,6 +5,7 @@ Purpose:
     actions specified by the -t flag in pshare
 '''
 
+import sys
 from tweet import Tweet
 import tweepy
 import os.path
