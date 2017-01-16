@@ -20,6 +20,7 @@ class TestTwitter(unittest.TestCase):
         # simulate "psh -t read" command args
         args = Namespace(cargs='home', command='read', facebook=False, media='', number=10, status='', twitter=True, verbose=False)
         self.t = Twitter(args)
+        self.t.login()
 
     def test_login(self):
         '''
@@ -27,8 +28,6 @@ class TestTwitter(unittest.TestCase):
         and first_time_auth() by checking the access
         token of 'self.auth'
         '''
-        self.t.login()
-        
         # read in access token from 'twitter-access-token.txt'
         with open('twitter-access-token.txt', 'r') as infile:
             content = infile.readlines()
@@ -41,13 +40,11 @@ class TestTwitter(unittest.TestCase):
         '''
         Tests get_tweepy_API & verify() indirectly
         '''
-        self.t.login()
         self.assertFalse(isinstance(self.t.api, tweepy.API))
         self.t.get_tweepy_API()
         self.assertTrue(isinstance(self.t.api, tweepy.API))
 
     def test_statuses_to_tweets(self):
-        self.t.login()
         self.t.get_tweepy_API()
         statuses = self.t.api.home_timeline(count=self.t.args.number)
         tweets = self.t.statuses_to_tweets(statuses)
@@ -56,10 +53,6 @@ class TestTwitter(unittest.TestCase):
 
         tweets = self.t.statuses_to_tweets([])
         self.assertFalse(tweets)
-
-    #def test_post(self):
-
-    #def test_delete(self):
 
 if __name__ == '__main__':
     unittest.main()
