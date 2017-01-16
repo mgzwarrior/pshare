@@ -119,8 +119,9 @@ Or you can manually install it:
         
         psh [-t | -f] del 81067 (delete tweet/post with id_num 81067)
 
-## Description:
+## Implementation:
 
-1. _pshare_ is a command-line interface (CLI) for social media sharing on Twitter and Facebook. The goal of pshare is to be *simple, lightweight, and easy to use* to do any type of CRUD-activity on the terminal.
-2. The design of pshare is to be on top of Facebook and Twitter API wrappers, to allow them to do the heavy lifting of interacting directly with the API, which allows pshare to pick and choose the functions necessary and most commonly used to add to this project.
-3. pshare -- API Wrappers (tweepy, facepy) -- API (Facebook Graph API, Twitter API)
+1. The implementation of pshare was specifically to be used on top of Facebook and Twitter API wrappers (tweepy + facepy). This allows the API wrappers to do the heavy lifting of interacting directly with the API, which enables pshare to pick and choose the functions necessary and most commonly used to implement the basic commands of read, post, and delete.
+2. Hierarchy:
+    
+    pshare <--> API Wrappers (tweepy + facepy) <--> API (Facebook Graph API, Twitter API)
