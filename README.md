@@ -65,32 +65,44 @@ Or you can manually install it:
 
 1. read
 
-    1. Twitter:
+    - Twitter:
+
+        ```
         psh -t read [cargs] [cflags]
         cargs = [home, user] (defaults to home -- which feed to read)
         cflags = [-n #] [-v] (print out n posts, print extra information per post)
+        ```
 
-    2. Facebook:
+    - Facebook:
+
+        ```
         psh -f read [cflags]
         cflags = same as above
+        ```
 
-        Note: only difference is cargs does NOT affect the facebook read command
-        but they can be used together, it simply has no effect on FB, only twitter.
+    Note: only difference is cargs does NOT affect the facebook read command
+    but they can be used together, it simply has no effect on FB, only twitter.
 
 2. post
 
-    1. Twitter & Facebook:
+    - Twitter & Facebook:
+
+        ```
         psh -tf post [cargs] [cflags]
         cargs = ["description/post"]
         cflags = [-m "media.jpg"] [-s "status.txt"]
-
+        ```
+        
 3. del
 
-    1. Twitter & Facebook:
+    - Twitter & Facebook:
+
+        ```
         psh -t del [cargs]
         psh -f del [cargs]
         cargs = [id_number]
         id_number = id of tweet or facebook post to be deleted (can be found with read command)
+        ```
 
 4. Examples
 
