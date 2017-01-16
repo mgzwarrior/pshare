@@ -35,15 +35,6 @@ cflags.add_argument('-s', '--status', type=str, default='',
                     help='name of text file to be posted')
 args = parser.parse_args()
 
-def init_facebook():
-    print 'init_facebook()'
-
-def auth_facebook():
-    print 'auth_facebook()'
-
-def verify_facebook():
-    print 'verify_facebook()'
-
 def main():
     if args.twitter:
         t = Twitter(args)
@@ -56,9 +47,8 @@ def main():
         else:
             t.delete()
 
+    # TODO: implement Facebook class 
     if args.facebook:
-        # TODO: implement Facebook class OR functions
-        print 'Facebook flag -f specified'
     
 if __name__ == '__main__':
     main()
