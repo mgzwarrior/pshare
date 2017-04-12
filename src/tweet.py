@@ -1,8 +1,6 @@
-'''
-Author: Brandon Powers
+# Author: Brandon Powers
 
-Holds a more-readable model for a Tweet, fields for both verbose & non-verbose output
-'''
+# Holds a readable model for a Tweet, fields for both verbose & non-verbose output
 
 class Tweet:
     def __init__(self, name, screen_name, text, created_at, id_num):

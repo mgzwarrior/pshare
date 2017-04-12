@@ -1,9 +1,8 @@
-'''
-Authors: Brandon Powers & Matt Grant
-'''
+# Authors: Brandon Powers & Matt Grant
 
 import sys
 from twitter import Twitter
+from facebook import Facebook
 import argparse
 
 # Disables two warnings when pshare is run
@@ -46,9 +45,17 @@ def main():
             t.post()
         else:
             t.delete()
-
-    # TODO: implement Facebook class 
+ 
     if args.facebook:
+        f = Facebook(args)
+        f.login()
+        f.get_facepy_API()
+        if args.command == 'read':
+            f.read()
+        elif args.command == 'post':
+            f.post()
+        else:
+            f.delete()
     
 if __name__ == '__main__':
     main()
