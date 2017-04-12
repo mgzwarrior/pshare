@@ -8,10 +8,16 @@ import facepy
 from facepy import GraphAPI
 import os.path
 
+# initializing authentication -- consumer info is hidden in local directory, not on GitHub for security purposes -- ask for use
+APPLICATION_ID = '190191088163549'
+APPLICATION_SECRET = '830886c7f6d51dceea255f8b258a339b'
+
 class Facebook:
     def __init__(self, args):
-    	print("Facebook init")
-    	graph = GraphAPI(oauth_access_token)
+    	print('Facebook init')
+    	graph = GraphAPI('access token')
+    	friends = graph.get('me/friends/')
+    	print(friends)
 
     def login(self):
     	print("Facebook login")
