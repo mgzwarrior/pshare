@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
       name = 'pshare',
       packages = ['pshare'],
-      version = '0.1',
+      version = '0.2',
       description = 'The Python CLI for social media',
       author = 'Brandon Powers and Matt Grant',
       author_email = 'mattgrant33@gmail.com',
