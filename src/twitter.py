@@ -9,8 +9,8 @@ import tweepy
 import os.path
 
 # initializing authentication -- consumer info is hidden in local directory, not on GitHub for security purposes -- ask for use
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
+CONSUMER_KEY = 'xopCIjkuJk5FJupf653EAI9Am'
+CONSUMER_SECRET = 'X7BVFS7GCYIUzsvQE6JuiFTnFnPPvDy954UUVb6HxOF0MAXXlH'
 ACCESS_KEY = ''
 ACCESS_SECRET = ''
 
