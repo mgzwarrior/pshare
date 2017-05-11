@@ -26,7 +26,7 @@ class index:
                 code=user_data.code
             )
             graph = GraphAPI(response['access_token'])
-            return graph.get('me/posts')
+            return graph.get('me')
 
     def POST(self):
         return "Hello, world!"
